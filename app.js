@@ -112,7 +112,7 @@ pen.fillStyle = 'yellow';
 
 
 // Height and width of the canvas element
-const H = 665;
+const H = 670;
 const W = 1205;
 const cs = 67;
 let food = null;
