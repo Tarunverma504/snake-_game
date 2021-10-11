@@ -112,13 +112,38 @@ pen.fillStyle = 'yellow';
 
 
 // Height and width of the canvas element
-const H = 735;
-const W = 1200;
+const H = 665;
+const W = 1205;
 const cs = 67;
 let food = null;
 let score = 0;
 let gameOver = false;
 
+function roundRect(ctx, x, y, width, height, radius, fill, stroke) {
+    if (typeof stroke == "undefined" ) {
+      stroke = true;
+    }
+    if (typeof radius === "undefined") {
+      radius = 5;
+    }
+    ctx.beginPath();
+    ctx.moveTo(x + radius, y);
+    ctx.lineTo(x + width - radius, y);
+    ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+    ctx.lineTo(x + width, y + height - radius);
+    ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+    ctx.lineTo(x + radius, y + height);
+    ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+    ctx.lineTo(x, y + radius);
+    ctx.quadraticCurveTo(x, y, x + radius, y);
+    ctx.closePath();
+    if (stroke) {
+      ctx.stroke();
+    }
+    if (fill) {
+      ctx.fill();
+    }        
+  }
 
 const snake = {
     init_len: 5,
@@ -137,7 +162,9 @@ const snake = {
     },
     drawSnake: function () {
         for (let cell of this.cells) {
-            pen.fillRect(cell.x*cs, cell.y*cs, cs-1, cs-1);
+            //pen.fillRect(cell.x*cs, cell.y*cs, cs-1, cs-1);   //cell width = cs-1  and cell left top coordinates.
+            roundRect(pen, cell.x*cs, cell.y*cs, cs-1, cs-1, (cs+20)/2, true, true);
+            pen.strokeStyle = "rgb(255, 217, 0)";
         }
     },
     updateSnake:function () {
@@ -247,8 +274,9 @@ function draw() {
     pen.font = '40px sans-serif';
     pen.fillStyle = 'lightgreen';
     pen.fillText(`Score : ${score}`, 50, 50);
-    pen.fillStyle = 'blue';
-    pen.fillRect(food.x * cs, food.y * cs, cs, cs);
+    pen.fillStyle = 'rgb(4, 7, 173)';
+    //pen.fillRect(food.x * cs, food.y * cs, cs, cs);
+    roundRect(pen, food.x*cs, food.y*cs, cs-1, cs-1, (cs-1)/2, true, true);
     pen.fillStyle = 'yellow';
     snake.drawSnake();
 }
