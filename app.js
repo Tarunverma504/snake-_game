@@ -112,7 +112,7 @@ pen.fillStyle = 'yellow';
 
 
 // Height and width of the canvas element
-const H = 665;
+const H = 670;
 const W = 1205;
 const cs = 67;
 let food = null;
@@ -163,7 +163,7 @@ const snake = {
     drawSnake: function () {
         for (let cell of this.cells) {
             //pen.fillRect(cell.x*cs, cell.y*cs, cs-1, cs-1);   //cell width = cs-1  and cell left top coordinates.
-            roundRect(pen, cell.x*cs, cell.y*cs, cs-1, cs-1, (cs+20)/2, true, true);
+            roundRect(pen, cell.x*cs, cell.y*cs, cs-1, cs-1, (cs+8.5)/2, true, true);
             pen.strokeStyle = "rgb(255, 217, 0)";
         }
     },
